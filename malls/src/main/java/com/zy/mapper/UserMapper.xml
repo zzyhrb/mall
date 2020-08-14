@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.mapper.UserMapper">
+	<resultMap type="com.zy.pojo.User" id="userResultMap">
+		<id property="id" column="u_id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+	</resultMap>
+	<select id="get" resultMap="userResultMap">
+		select * from t_users where u_id=#{id}
+	</select>
+	
+	<delete id="delete">
+		delete from t_users where u_id=#{id}
+	</delete>
+	
+	<insert id="add">
+		insert into t_users(name,age)values(#{name},#{age})
+	</insert>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from t_users
+	</select>
+	
+	<select id="select" resultMap="userResultMap">
+		select * from t_users limit #{start}, #{limit}
+	</select>
+	<select id="getByNameAndPassword" resultMap="userResultMap">
+		select * from t_users where name=#{param1} and password=#{param2}
+	</select>
+	
+	
+</mapper>
